@@ -11,6 +11,24 @@
         <content type="html"><![CDATA[]]></content>
       
       
+      <categories>
+          
+          <category> Pwn </category>
+          
+          <category> Armpwn </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Arm </tag>
+            
+            <tag> Iot </tag>
+            
+            <tag> Pwn </tag>
+            
+        </tags>
       
     </entry>
     
