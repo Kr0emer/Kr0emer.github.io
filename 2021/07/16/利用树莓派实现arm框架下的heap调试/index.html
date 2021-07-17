@@ -67,7 +67,7 @@
 <h2 id="pwndbg安装"><a href="#pwndbg安装" class="headerlink" title="pwndbg安装"></a>pwndbg安装</h2><p>使用下面命令来安装pwntools</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717121038336.png" alt="image-20210717121038336"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717121038336.png" alt="验证pwndbg安装"></p>
 <p>这样就是安装成功啦</p>
 <h2 id="patchelf"><a href="#patchelf" class="headerlink" title="patchelf"></a>patchelf</h2><p>patchelf是我们用来改写文件ld和libc的这里推荐<em>patchelf_0.12</em></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/NixOS/patchelf">https://github.com/NixOS/patchelf</a></p>
@@ -82,15 +82,15 @@
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">chmod 777 -R glibc-all-in-one/</span><br><span class="line"><span class="built_in">cd</span> glibc-all-in-one/</span><br><span class="line">sudo pip install requests </span><br><span class="line">./update_list</span><br><span class="line">./download 2.23-0ubuntu11.3_amd64</span><br></pre></td></tr></table></figure>
 
 <p>这样基本就完成了</p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717131220453.png" alt="image-20210717131220453"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717131220453.png" alt="完成后的效果"></p>
 <p>类似上图，然后删除debs和libc里的文件，这些都是x86下的，用不到的.</p>
 <h1 id="如何更改libc并完成调试"><a href="#如何更改libc并完成调试" class="headerlink" title="如何更改libc并完成调试"></a>如何更改libc并完成调试</h1><h2 id="下载libc"><a href="#下载libc" class="headerlink" title="下载libc"></a>下载libc</h2><p>当什么的工作都完成了我们就可以开始调试啦，我们以一道题目为例</p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717130021816.png" alt="image-20210717130021816"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717130021816.png" alt="例子"></p>
 <p>一般附件会给我们四个文件，这里我们需要的只要libc-2.31.so和题目文件</p>
 <p>先将libc放入我们的树莓派系统中</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chmod +x libc-2.31.so</span><br><span class="line">./libc-2.31.so</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717132511485.png" alt="image-20210717132511485"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717132511485.png" alt="查看libc版本"></p>
 <p>这样我们就能找到对应的libc版本</p>
 <p>在这个网站中我们可以找到不同架构的不同版本libc，只要<strong>更改最后的路径</strong>即可,需要什么版本搜索什么</p>
 <p><a target="_blank" rel="noopener" href="https://launchpad.net/ubuntu/+source/glibc/2.31-0ubuntu9.2">https://launchpad.net/ubuntu/+source/glibc/2.31-0ubuntu9.2</a></p>
@@ -118,9 +118,9 @@
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717134809674.png" alt="验证"></p>
 <p>可以发现没有任何问题</p>
 <h2 id="调试验证"><a href="#调试验证" class="headerlink" title="调试验证"></a>调试验证</h2><p>我们用gdb调试一下看看</p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717134953976.png" alt="image-20210717134953976"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717134953976.png" alt="heap可行"></p>
 <p>这样完成调试，显示heap</p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717135015786.png" alt="image-20210717135015786"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717135015786.png" alt="bins可行"></p>
 <p>也可以正常显示bins，这样就完成了我们的环境搭建了。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这是我的第一篇博客啦，有写的有问题的地方还望各位师傅斧正。上面的操作基本可以实现在arm架构下的脚本写exp并调试，如果觉得自带的vim不够方便的话还可以使用远程编辑exp，这个会在日后更新的。这里是本人的一点拙见，希望我写的东西能对你有一丝丝的帮助，感谢每个观看该文章的师傅。</p>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Kr0emer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://kr0emer.github.io/2021/07/16/利用树莓派实现arm框架下的heap调试/">http://kr0emer.github.io/2021/07/16/利用树莓派实现arm框架下的heap调试/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Arm/">Arm</a><a class="post-meta__tags" href="/tags/Iot/">Iot</a><a class="post-meta__tags" href="/tags/Pwn/">Pwn</a></div><div class="social-share pull-right"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
