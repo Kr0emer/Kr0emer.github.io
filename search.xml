@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>pwn入门指南</title>
+      <link href="/2021/07/19/pwn%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"/>
+      <url>/2021/07/19/pwn%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写这篇是因为学校社团招新需要给学弟学妹每个方向的大致印象，发展方向，当然我也希望这篇文章可以帮助到更多的人。接下来我会介绍一下入门pwn需要准备一些什么，学习一些什么，希望这些不成熟的意见可以帮助到刚开始入门pwn的你。由于篇幅有限，这里不会详细介绍各个知识点，更多的是一些链接，不涉及具体内容，只是帮你找到你应该学什么，推荐一些学习资源。</p><h1 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h1><p>这里推荐一些适合刚刚准备入门pwn方向的书籍，所以这里并没有列出一些pwn方向很重要，但不是新手需要的书籍。</p><h2 id="《程序员的自我修养：链接装载与库》"><a href="#《程序员的自我修养：链接装载与库》" class="headerlink" title="《程序员的自我修养：链接装载与库》"></a>《程序员的自我修养：链接装载与库》</h2><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/1b4c510fd9f9d72a95616a43df2a2834349bbb63" alt="程序员的自我修养"></p><p>这本书是对pwn入门来说非常非常有用的一本书，可以说是一本必读的书，能让你更清楚的了解很多pwn知识点背后的逻辑。可以说是必读的书了。</p><h2 id="《CTF竞赛权威指南（Pwn篇）》"><a href="#《CTF竞赛权威指南（Pwn篇）》" class="headerlink" title="《CTF竞赛权威指南（Pwn篇）》"></a>《CTF竞赛权威指南（Pwn篇）》</h2><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/0b55b319ebc4b74543a9b3057cb609178a82b901bfc4" alt="ctf权威指南"></p><p>书中涵盖了pwn各个方向的知识点，虽说很多最新的知识点该书不能提供，但是作为入门数据，这本书的知识点起码够你学大半年了。比市面上其他ctf入门书籍更加适合pwn手，强烈推荐。</p><h2 id="《深入理解计算机系统（又名CSAPP）》"><a href="#《深入理解计算机系统（又名CSAPP）》" class="headerlink" title="《深入理解计算机系统（又名CSAPP）》"></a>《深入理解计算机系统（又名CSAPP）》</h2><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/s29195878.jpg" alt="csapp"></p><p>这是一本很厚重的书，虽说没有像上面两本书那么直接对pwn做题有直接帮助，但是这本书一定是pwn方向，不不不，它可以说是所有计算机方向必读书籍了，对你长期成长来说肯定有帮助，希望在闲暇时间去读一读。</p><h1 id="网站以及入门视频推荐"><a href="#网站以及入门视频推荐" class="headerlink" title="网站以及入门视频推荐"></a>网站以及入门视频推荐</h1><p>刷题网站和ctfwiki这里就不做过多的赘述了，这里提供一些适合新人pwn方向独有的平台，和自己觉得不错的入门视频</p><h2 id="pwnable-kr"><a href="#pwnable-kr" class="headerlink" title="pwnable.kr"></a>pwnable.kr</h2><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210719104848925.png" alt="pwnable.kr"></p><p>网址：<a href="https://pwnable.kr/">https://pwnable.kr/</a></p><p>这个平台的漏洞虽然和我们国内比赛主流方向的关系不是很大，但是里面有很多可以学习的知识点，还是很推荐大家做一做的，很多题目比较适合新手。</p><h2 id="XMCVE-2020-CTF-Pwn入门课程"><a href="#XMCVE-2020-CTF-Pwn入门课程" class="headerlink" title="XMCVE 2020 CTF Pwn入门课程"></a>XMCVE 2020 CTF Pwn入门课程</h2><p>网址：<a href="https://www.bilibili.com/video/BV1854y1y7Ro?share_source=copy_web">https://www.bilibili.com/video/BV1854y1y7Ro?share_source=copy_web</a></p><p>这部视频可以说是全b站最为详细的pwn入门视频了，细节抓的很清楚，缺点就是过于详实，可能会让你缺少一份自己的思考，视频时间也过长，需要耐心观看</p><h2 id="2020暑期Lilac-pwn入门培训"><a href="#2020暑期Lilac-pwn入门培训" class="headerlink" title="2020暑期Lilac-pwn入门培训"></a>2020暑期Lilac-pwn入门培训</h2><p>网址：<a href="https://www.bilibili.com/video/BV1Dt4y1D7mK?share_source=copy_web">https://www.bilibili.com/video/BV1Dt4y1D7mK?share_source=copy_web</a></p><p>这部视频其实是我入门时观看的视频，个人感觉讲解的很充分了，适合想要快速入门开始刷题的师傅们，其实从博客和题目中学习也是一种比较有效的方法</p><h1 id="pwn入门需要的基础知识"><a href="#pwn入门需要的基础知识" class="headerlink" title="pwn入门需要的基础知识"></a>pwn入门需要的基础知识</h1><h2 id="掌握c语言"><a href="#掌握c语言" class="headerlink" title="掌握c语言"></a>掌握c语言</h2><p>想要学习pwn首先就要学习c语言，这是最最最基础的工作，如果没有学习过c语言，可能连题目都看不懂。</p><p>推荐翁恺老师的c语言课程：<a href="https://www.icourse163.org/course/ZJU-9001?from=searchPage">https://www.icourse163.org/course/ZJU-9001?from=searchPage</a></p><h2 id="学习汇编"><a href="#学习汇编" class="headerlink" title="学习汇编"></a>学习汇编</h2><p>学习pwn还是要懂汇编语言的，起码先学习x86/x64下的汇编语言，学好汇编会让你开始的路走的很轻松，可以先学习8060的汇编，推荐王爽老师的《汇编语言》</p><h2 id="使用ida"><a href="#使用ida" class="headerlink" title="使用ida"></a>使用ida</h2><p>ida是一个非常好用的静态分析工具，可以说是一个神器，她会帮助你非常轻松的分析出题目的逻辑，基本是必须会使用的工具。你会发现ida的图标是一个女性，其实这是第一位程序员，她的名字就叫ida。</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210719111139804.png" alt="image-20210719111139804"></p><p>推荐一篇博客：<a href="https://xz.aliyun.com/t/4205%EF%BC%8C%E8%BF%99%E9%87%8C%E6%9C%89%E8%AF%A6%E7%BB%86%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B">https://xz.aliyun.com/t/4205，这里有详细的使用教程</a></p><h2 id="使用pwndbg"><a href="#使用pwndbg" class="headerlink" title="使用pwndbg"></a>使用pwndbg</h2><p>这其实是一个gdb的调试插件，这个工具可以帮助你更好的进行动态分析。关于工具的安装可以看我的另一篇博客，虽然是针对arm架构的树莓派的，但对于x64的ubuntu也适用。</p><p>安装：<a href="https://kr0emer.com/2021/07/16/%E5%88%A9%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E7%8E%B0arm%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84heap%E8%B0%83%E8%AF%95/#pwn%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">https://kr0emer.com/2021/07/16/%E5%88%A9%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E7%8E%B0arm%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84heap%E8%B0%83%E8%AF%95/#pwn%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA</a></p><h2 id="使用pwntools"><a href="#使用pwntools" class="headerlink" title="使用pwntools"></a>使用pwntools</h2><p>pwnatools的安装上面的链接中也有，这是一个编写python交互的库，是pwn入门必备的工具。</p><p>编写脚本类似这样：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"></span><br><span class="line">io=remote(<span class="string">&#x27;220.249.52.133&#x27;</span>,<span class="number">44908</span>)</span><br><span class="line">sh_addr=<span class="number">0x0804868B</span></span><br><span class="line">payload=<span class="string">&quot;a&quot;</span>*<span class="number">24</span>+p32(sh_addr)</span><br><span class="line">payload=payload.ljust(<span class="number">262</span>,<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">io.recvuntil(<span class="string">&quot;Your choice:&quot;</span>)</span><br><span class="line">io.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">io.sendafter(<span class="string">&quot;your username:&quot;</span>,<span class="string">&#x27;kreomer&#x27;</span>) </span><br><span class="line"></span><br><span class="line">io.sendafter(<span class="string">&quot;your passwd:&quot;</span>,payload) </span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure><p>官方教程：<a href="https://docs.pwntools.com/en/latest/">https://docs.pwntools.com/en/latest/</a></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>pwn入门的基础基本就是以上这些，想要了解具体的攻击方法可以通过以上书籍、视频或者借助ctfwiki来学习（<a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stack-intro/%EF%BC%89%EF%BC%8C%E7%94%B1%E4%BA%8E%E5%8F%AA%E6%98%AF%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%8C%87%E5%8D%97%EF%BC%8C%E8%BF%99%E9%87%8C%E4%B8%8D%E6%B6%89%E5%8F%8A%E5%85%B7%E4%BD%93%E6%BC%8F%E6%B4%9E%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E3%80%82%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E4%BB%A5%E4%B8%8A%E6%8F%90%E4%BE%9B%E7%9A%84%E9%93%BE%E6%8E%A5%E8%BF%9B%E8%A1%8C%E5%AD%A6%E4%B9%A0%E3%80%82">https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stack-intro/），由于只是一个简单的指南，这里不涉及具体漏洞的攻击方法。可以通过以上提供的链接进行学习。</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Pwn </category>
+          
+          <category> X86/x64pwn </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Pwn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>利用树莓派实现arm架构下的heap调试</title>
       <link href="/2021/07/16/%E5%88%A9%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E7%8E%B0arm%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84heap%E8%B0%83%E8%AF%95/"/>
       <url>/2021/07/16/%E5%88%A9%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E7%8E%B0arm%E6%A1%86%E6%9E%B6%E4%B8%8B%E7%9A%84heap%E8%B0%83%E8%AF%95/</url>
@@ -22,11 +49,11 @@
       
         <tags>
             
+            <tag> Pwn </tag>
+            
             <tag> Arm </tag>
             
             <tag> Iot </tag>
-            
-            <tag> Pwn </tag>
             
         </tags>
       
