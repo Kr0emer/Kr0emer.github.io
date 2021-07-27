@@ -45,21 +45,29 @@
 <p>把启用图片的√打掉就好了，此时你还发现取消掉背景怎么还是蓝色的，别着急，看看这里还要配色栏，你有很多钟配色可以选择，最下面有字体大小选择，这样就可以选择合适的字体大小和配色啦（毕竟<em>皮肤和坐骑的搭配才是获胜的关键</em>，这样就可以舒舒服服的进行调试啦。</p>
 <h1 id="pwn调试环境搭建"><a href="#pwn调试环境搭建" class="headerlink" title="pwn调试环境搭建"></a>pwn调试环境搭建</h1><p>接下来就可以正式开始我们的环境搭建了，这里才是痛苦的开始，在配置环境期间遇到了数不清的问题，这一部分仅供参考，实际安装的时候还是要记得多搜索，毕竟这里每个人遇到的情况都有可能不同。</p>
 <h2 id="python2的pip安装和pwntools安装"><a href="#python2的pip安装和pwntools安装" class="headerlink" title="python2的pip安装和pwntools安装"></a>python2的pip安装和pwntools安装</h2><p>我们先来解决最困难的，也就是python2的pwntools安装，之前一直是直接使用pip连接并没有发现什么问题，但是这次却有些问题，不管怎么说先安装python2</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install python</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install python</span><br><span class="line">sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1</span><br></pre></td></tr></table></figure>
 
 <p>这样就将python的默认为python2了，如下图</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717105912959.png" alt="python默认pthon2"></p>
-<p>接下来是pip的安装，现在已经无法正常安装python2的pip了，只能采取一些其他的手法,先安装setup-tools</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">wget https://pypi.python.org/packages/45/29/8814bf414e7cd1031e1a3c8a4169218376e284ea2553cc0822a6ea1c2d78/setuptools-36.6.0.zip<span class="comment">#md5=74663b15117d9a2cc5295d76011e6fd1</span></span><br><span class="line">unzip setuptools-36.6.0.zip </span><br><span class="line"><span class="built_in">cd</span> setuptools-36.6.0</span><br><span class="line">sudo python setup.py install</span><br></pre></td></tr></table></figure>
+<p>接下来是pip的安装，现在已经无法正常安装python2的pip了，只能采取一些其他的手法,先安装setup-tools，这里需要先安装打开zip文件的软件</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install unzip</span><br><span class="line">wget https://pypi.python.org/packages/45/29/8814bf414e7cd1031e1a3c8a4169218376e284ea2553cc0822a6ea1c2d78/setuptools-36.6.0.zip<span class="comment">#md5=74663b15117d9a2cc5295d76011e6fd1</span></span><br><span class="line">unzip setuptools-36.6.0.zip </span><br><span class="line"><span class="built_in">cd</span> setuptools-36.6.0</span><br><span class="line">sudo python setup.py install</span><br></pre></td></tr></table></figure>
 
 <p>再安装pip</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">wget https://pypi.python.org/packages/11/b6/abcb525026a4be042b486df43905d6893fb04f05aac21c32c638e939e447/pip-9.0.1.tar.gz<span class="comment">#md5=35f01da33009719497f01a4ba69d63c9</span></span><br><span class="line">tar -zxvf pip-9.0.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> pip-9.0.1</span><br><span class="line">sudo python setup.py install</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">wget https://bootstrap.pypa.io/pip/2.7/get-pip.py</span><br><span class="line">sudo python2 get-pip.py</span><br></pre></td></tr></table></figure>
 
 <p>查看pip版本<code>pip --version </code></p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717113029446.png" alt="检查pip版本"></p>
 <p>说明pip安装完成</p>
 <p>接下来安装pwntools</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Gallopsled/pwntools</span><br><span class="line"><span class="built_in">cd</span> pwntools</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<p>安装pwntools之前还需要一些准备工作,</p>
+<p>安装gcc</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install gcc</span><br></pre></td></tr></table></figure>
+
+<p>安装capstone</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt install make </span><br><span class="line">git <span class="built_in">clone</span> https://github.com/aquynh/capstone</span><br><span class="line"><span class="built_in">cd</span> capstone</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<p>安装pwntools</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python-dev</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/Gallopsled/pwntools</span><br><span class="line"><span class="built_in">cd</span> pwntools</span><br><span class="line">sudo python setup.py install</span><br></pre></td></tr></table></figure>
 
 <p>验证一下pwntools可用</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210717113956081.png" alt="验证pwntools"></p>
