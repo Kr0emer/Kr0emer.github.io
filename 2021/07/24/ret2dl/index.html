@@ -14,26 +14,26 @@
 <p>bar@plt的第一条通过GOT间接跳转指令，假设我们已经进行过延迟绑定，此时bar@GOT里存放这我们真正的bar函数对应的项，那么这个跳转指令自然会跳转到我们想要的地方。但是，如果还没有进行过延迟绑定那，那么此时这里存放的必定不是我们想要的地址，<strong>此时bar@GOT存放的其实是bar@plt的第二条指令</strong>，第二条指令是将一个数字n压入栈里，而这个数字是<strong>bar这个符号引用在重定位表”.rel.plt”的下标</strong>。接下来又一个push将指令模块的ID压入栈中，最后再跳转到 <em><strong>_dl_runtime_resolve</strong></em>。</p>
 <p>当bar()这个函数被解析过一次，那么下次调用就不用再次重定位，只需要直接跳转到bar()函数中。ELF将GOT拆为两个表”.got”和 “.got.plt”，其中”.got”来报存全局变量引用地址，”.got.plt”保存函数引用地址。</p>
 <h1 id="一些重要的section"><a href="#一些重要的section" class="headerlink" title="一些重要的section"></a>一些重要的section</h1><h2 id="“-interp”"><a href="#“-interp”" class="headerlink" title="“.interp”"></a>“.interp”</h2><p>当我们的系统将可执行文件装载之后，其中好多地址还处于无效状态，此时需要<strong>动态链接器</strong>通过映射的方法加载到进程的地址空间中。操作系统加载完动态链接器后，将控制权交给动态链接器的入口地址。动态链接器获取控制器，执行自身初始化工作，然后根据环境参数对可执行文件进行动态链接工作。当动态链接工作完成后将控制权交由可执行文件入口，程序开始正式执行。</p>
-<p>而动态链接器的位置由谁来决定那？实际上是由ELF文件自己决定的，而决定这一切的section叫做***.interp***。</p>
+<p>而动态链接器的位置由谁来决定那？实际上是由ELF文件自己决定的，而决定这一切的section叫做<em><strong>.interp</strong></em>。</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210726111522241.png" alt="’.interp‘"></p>
 <p>上图就是某个文件的’.interp’段，大多数情况下动态链接器都位于/lib里，但是这里我用patchelf更改过了，也说明这里是可以更改的，由ELF文件自己决定的。</p>
 <p>这个段的内容很简单，里面就保存了上面这样的字符串，而这个字符串就是动态链接器的路径。</p>
-<h2 id="“-dynamic”"><a href="#“-dynamic”" class="headerlink" title="“.dynamic”"></a>“.dynamic”</h2><p>动态链接最为重要的结构就是***.dynamic***，这个段保存了动态链接库需要的最基本的信息，比如依赖于哪些共享对象、动态连接符号表的位置、动态链接重定位表位置、共享对象初始化代码的地址等。这方面有点类似于ELF的文件头，它可以算是在动态链接下对ELF头的补充。我们随便找一个文件看一看他的”.dynamic”段。</p>
+<h2 id="“-dynamic”"><a href="#“-dynamic”" class="headerlink" title="“.dynamic”"></a>“.dynamic”</h2><p>动态链接最为重要的结构就是<em><strong>.dynamic</strong></em>，这个段保存了动态链接库需要的最基本的信息，比如依赖于哪些共享对象、动态连接符号表的位置、动态链接重定位表位置、共享对象初始化代码的地址等。这方面有点类似于ELF的文件头，它可以算是在动态链接下对ELF头的补充。我们随便找一个文件看一看他的”.dynamic”段。</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210727162459172.png" alt="&#39;.dynamic&#39;"></p>
 <p>其中:</p>
 <p><strong>NEEDED</strong>是依赖的共享对象文件；</p>
 <p><strong>INIT</strong>是初始化代码地址，也就是.init的位置，<strong>FINT</strong>是结束代码地址，也就是.fini的位置;</p>
 <p><strong>GUN_HASH</strong>是动态链接哈希表地址；</p>
-<p><strong>STRTAB</strong>是动态链接字符串表的位置，表示**.dynstr**的位置;</p>
-<p><strong>SYMTAB</strong>是动态链接符号表的位置,表示**.dynsym**的位置;</p>
-<p><strong>PLTGOT</strong>指向**.got**的位置;</p>
+<p><strong>STRTAB</strong>是动态链接字符串表的位置，表示<strong>.dynstr</strong>的位置;</p>
+<p><strong>SYMTAB</strong>是动态链接符号表的位置,表示<strong>.dynsym</strong>的位置;</p>
+<p><strong>PLTGOT</strong>指向<strong>.got</strong>的位置;</p>
 <p><strong>REL\RELA</strong>表示动态链接重定位表的位置;<strong>RELENT/RELAENT</strong>表示动态重读位表入口数量</p>
-<h2 id="“-dynsym”-”-dynstr”-amp-”-hash”"><a href="#“-dynsym”-”-dynstr”-amp-”-hash”" class="headerlink" title="“.dynsym”,”.dynstr”&amp;”.hash”"></a>“.dynsym”,”.dynstr”&amp;”.hash”</h2><p>在静态链接中有一个专门的段叫做***.symtab***,里面保存了所有关于该目标的符号的定义和引用.而为了表示动态链接模块间的符号导入导出关系,ELF专门有一个叫做<strong>动态链接符号表</strong>的段用来保存这些信息,也就是***.dynsym***.</p>
-<p>重要的是”.dynsym”只保存了动态链接相关的符号,而模块内私有的变量则不会保存.通常动态链接的模块同时包含这两个段,”.symtab”包含所有的符号,也包括”.dynsym”中的符号.静态链接中需要”.strtab”,一个用于保存符号名的字符串表.而”.cybsym”对应的就是动态符号字符串表***.dynstr***.由于动态链接中我们需要在程序运行的时候查找符号,为了加快符号的查找过程,往往通过<strong>符号哈希表</strong>—<em><strong>.hash</strong></em>来加快符号查找速度</p>
+<h2 id="“-dynsym”-”-dynstr”-amp-”-hash”"><a href="#“-dynsym”-”-dynstr”-amp-”-hash”" class="headerlink" title="“.dynsym”,”.dynstr”&amp;”.hash”"></a>“.dynsym”,”.dynstr”&amp;”.hash”</h2><p>在静态链接中有一个专门的段叫做<em><strong>.symtab</strong></em>,里面保存了所有关于该目标的符号的定义和引用.而为了表示动态链接模块间的符号导入导出关系,ELF专门有一个叫做<strong>动态链接符号表</strong>的段用来保存这些信息,也就是<em><strong>.dynsym</strong></em>.</p>
+<p>重要的是”.dynsym”只保存了动态链接相关的符号,而模块内私有的变量则不会保存.通常动态链接的模块同时包含这两个段,”.symtab”包含所有的符号,也包括”.dynsym”中的符号.静态链接中需要”.strtab”,一个用于保存符号名的字符串表.而”.cybsym”对应的就是动态符号字符串表<em><strong>.dynstr</strong></em>.由于动态链接中我们需要在程序运行的时候查找符号,为了加快符号的查找过程,往往通过<strong>符号哈希表</strong>—<em><strong>.hash</strong></em>来加快符号查找速度</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210727170027080.png" alt="&#39;.dynsym&#39;"></p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210727170510147.png" alt=".hash"></p>
-<h2 id="“-rel-dyn”-amp-”-rel-plt”"><a href="#“-rel-dyn”-amp-”-rel-plt”" class="headerlink" title="“.rel.dyn”&amp;”.rel,plt”"></a>“.rel.dyn”&amp;”.rel,plt”</h2><p>静态链接中有***.rel.text***(代码段重定位表)和***.rel.data***(数据段重定位表)作为静态链接中用于表示重定位信息的重定位表.</p>
-<p>在动态链接中自然也有与之对应的重定位表***.rel.dyn***,<em><strong>.rel,plt</strong></em>.”rel.dtn”实际上是对数据引用的修正,它所修正的位置位于”.got”以及数据段;而”.rel.plt”是对函数引用的修正,它所修正的位置位于”.got.plt”.</p>
+<h2 id="“-rel-dyn”-amp-”-rel-plt”"><a href="#“-rel-dyn”-amp-”-rel-plt”" class="headerlink" title="“.rel.dyn”&amp;”.rel,plt”"></a>“.rel.dyn”&amp;”.rel,plt”</h2><p>静态链接中有<em><strong>.rel.text</strong></em>(代码段重定位表)和<em><strong>.rel.data</strong></em>(数据段重定位表)作为静态链接中用于表示重定位信息的重定位表.</p>
+<p>在动态链接中自然也有与之对应的重定位表<em><strong>.rel.dyn</strong></em>,<em><strong>.rel,plt</strong></em>.”rel.dtn”实际上是对数据引用的修正,它所修正的位置位于”.got”以及数据段;而”.rel.plt”是对函数引用的修正,它所修正的位置位于”.got.plt”.</p>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Kr0emer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://kr0emer.com/2021/07/24/ret2dl/">http://kr0emer.com/2021/07/24/ret2dl/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Pwn/">Pwn</a></div><div class="social-share pull-right"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/2021/07/19/pwn%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><span>pwn入门指南</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
   clientID: '699be94dd9838f660bbd',
   clientSecret: '68baa1120b9638dd3038c08ccb5d72c0da979cdc',
