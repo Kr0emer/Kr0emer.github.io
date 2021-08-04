@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://kr0emer.com/2021/07/24/ret2dl/</loc>
+    <loc>http://kr0emer.com/2021/08/04/DASCTF%20July%20X%20CBCTF%204th%20pwn%E5%A4%8D%E7%8E%B0/</loc>
     
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://kr0emer.com/2021/07/24/ret2dlresolve/</loc>
+    
+    <lastmod>2021-07-29</lastmod>
     
   </url>
   
@@ -46,7 +53,7 @@
 
   <url>
     <loc>http://kr0emer.com/</loc>
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -54,21 +61,21 @@
   
   <url>
     <loc>http://kr0emer.com/tags/Pwn/</loc>
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/Arm/</loc>
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/Iot/</loc>
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -77,21 +84,21 @@
   
   <url>
     <loc>http://kr0emer.com/categories/Pwn/</loc>
-    <lastmod>2021-07-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://kr0emer.com/categories/Pwn/X86-x64pwn/</loc>
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/Pwn/Armpwn/</loc>
-    <lastmod>2021-07-27</lastmod>
+    <lastmod>2021-08-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://kr0emer.com/categories/Pwn/X86-x64pwn/</loc>
+    <lastmod>2021-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
