@@ -76,7 +76,7 @@
 <p>有了这个SHT我们就可以找到任何一个想要找到的section在哪里了。这里链接器就可以知道所有段的位置和长度。而仅仅找到每个段的位置是不足以让来链接器完成链接的工作的，我们不能单单是把相似的section合并了事。</p>
 <p>在runtime阶段，我们要调用一个变量或者函数是需要知道该函数或者是变量的位置的，这里就需要</p>
 <p>对符号进行分析。这里也需要一个表来寻找不同的符号，去对符号进行解析。</p>
-<h2 id="symbol-Table"><a href="#symbol-Table" class="headerlink" title="symbol Table"></a>symbol Table</h2><p>如果我们要定位到每个符号在ELF中的位置，这就需要一个section来表述这些符号，也就是**.symtab(符号表)<strong>。我们知道C语言不难在函数的内部再次定义函数，所以一个ELF文件平分为两层：函数的内部、函数外部。</strong>外部的**函数和变量是对链接可见的，所以它们可以被其他的ELF文件所引用，也就是符号。</p>
+<h2 id="symbol-Table"><a href="#symbol-Table" class="headerlink" title="symbol Table"></a>symbol Table</h2><p>如果我们要定位到每个符号在ELF中的位置，这就需要一个section来表述这些符号，也就是<strong>.symtab(符号表)<strong>。我们知道C语言不难在函数的内部再次定义函数，所以一个ELF文件平分为两层：函数的内部、函数外部。</strong>外部的</strong>函数和变量是对链接可见的，所以它们可以被其他的ELF文件所引用，也就是符号。</p>
 <table>
 <thead>
 <tr>
@@ -235,7 +235,7 @@
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210810182800665.png" alt="Section合并"></p>
 <h2 id="引用重定位"><a href="#引用重定位" class="headerlink" title="引用重定位"></a>引用重定位</h2><p>完成符号解析和section合并后基本EOF文件成型，但是函数或者变量之间的调用位置还没有写入，这时就需要对所有的符号进行重定位。</p>
 <p>我们先来看看重定位表的结构</p>
-<h3 id="Relocation-Table"><a href="#Relocation-Table" class="headerlink" title="Relocation Table"></a>Relocation Table</h3><p>对于可以重定位的ELF文件来说，它必须有重定位表。对于每个要被重定位的ELF段都有一个对应的重定位表。对应.text有**.rel.text<strong>，对于.data有</strong>.rel.data**。每个要被重定位的地方叫做重定位入口。</p>
+<h3 id="Relocation-Table"><a href="#Relocation-Table" class="headerlink" title="Relocation Table"></a>Relocation Table</h3><p>对于可以重定位的ELF文件来说，它必须有重定位表。对于每个要被重定位的ELF段都有一个对应的重定位表。对应.text有<strong>.rel.text</strong>，对于.data有<strong>.rel.data</strong>。每个要被重定位的地方叫做重定位入口。</p>
 <p>重定位入口结构为：</p>
 <table>
 <thead>
