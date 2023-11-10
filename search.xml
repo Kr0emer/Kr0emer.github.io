@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>一种用虚拟机使用物理机代理的方法</title>
+      <link href="/2023/11/11/%E4%B8%80%E7%A7%8D%E7%94%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%BF%E7%94%A8%E7%89%A9%E7%90%86%E6%9C%BA%E4%BB%A3%E7%90%86%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+      <url>/2023/11/11/%E4%B8%80%E7%A7%8D%E7%94%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%BF%E7%94%A8%E7%89%A9%E7%90%86%E6%9C%BA%E4%BB%A3%E7%90%86%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="物理机：V2rayN设置"><a href="#物理机：V2rayN设置" class="headerlink" title="物理机：V2rayN设置"></a>物理机：V2rayN设置</h1><p>打开V2rayN的<strong>参数设置</strong>选项将下图中的<strong>“允许来自局域网的链接”</strong>勾选</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231111004012130.png" alt="image-20231111004012130"></p><p>然后点击确认即可，物理机的设置就这么多了。</p><h1 id="虚拟机：设置网络设置"><a href="#虚拟机：设置网络设置" class="headerlink" title="虚拟机：设置网络设置"></a>虚拟机：设置网络设置</h1><p>我这里使用的是<strong>ubuntu22.04.3 LTS amd64</strong>，找到设置中的网络选项，再设置网络代理类似下图所示</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231111004832363.png" alt="image-20231111004832363"></p><p>其中ip填写在主机中使用<strong>ipconfig</strong>命令来查找，端口号设定根据V2rayN下方所示的<strong>局域网</strong>端口号填写。</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231111005410652.png" alt="image-20231111005410652"></p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231111005018861.png" alt="image-20231111005018861"></p><p>这两步完成后，虚拟机就可以通过主机的代理来访问网络了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> trick </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> tricks </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>实现一个最简单的内核</title>
       <link href="/2023/11/11/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8/"/>
       <url>/2023/11/11/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8/</url>
