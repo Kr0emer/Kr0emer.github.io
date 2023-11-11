@@ -39,11 +39,11 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//vgastr.h</span></span><br><span class="line"><span class="keyword">void</span> _strwrite(<span class="keyword">char</span> * str);</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printf</span><span class="params">(<span class="keyword">char</span> *str,...)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <h1 id="编译和部署"><a href="#编译和部署" class="headerlink" title="编译和部署"></a>编译和部署</h1><p>通过makefile将代码编译，得到<strong>HelloOS.bin</strong>。</p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231111235434726.png" alt="image-20231111235434726"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231111235434726.png" alt="编译的结果"></p>
 <p>接下来就是部署了</p>
 <p>我们进入etc\default\grub文件</p>
 <p>首先将<strong>GRUB_TIMEOUT_STYLE</strong>的值从<strong>hidden</strong>改为<strong>menu</strong>，并将<strong>GRUB_TIMEOUT</strong>的值从<strong>0</strong>改为<strong>30</strong></p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231112001856786.png" alt="image-20231112001856786"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231112001856786.png" alt="修改grub文件"></p>
 <p>然后更新grub配置</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
 
@@ -51,14 +51,14 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menuentry &#x27;HelloOS&#x27; &#123;</span><br><span class="line">     insmod part_gpt #GRUB加载分区模块识别分区</span><br><span class="line">     insmod ext2 #GRUB加载ext文件系统模块识别ext文件系统</span><br><span class="line">     set root=&#x27;hd0,gpt3&#x27; #注意boot目录挂载的分区，这是我机器上的情况</span><br><span class="line">     multiboot2 /boot/HelloOS.bin #GRUB以multiboot2协议加载HelloOS.bin</span><br><span class="line">     boot #GRUB启动HelloOS.bin</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>根据<code>df /root/</code>的命令来查看set root应该设置为什么</p>
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231112003200032.png" alt="image-20231112003200032"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231112003200032.png" alt="df /root/命令"></p>
 <p>其中的“sda3”就是硬盘的第四个分区（硬件分区选择 MBR），但是 GRUB 的 menuentry 中不能写 sda3，而是要写“hd0,gpt3”，这是 GRUB 的命名方式，hd0 表示第一块硬盘，我的虚拟机是使用gpt分区表所以是gpt3。</p>
 <p>可以根据grub.cfg其他的menuentry来确定。</p>
-<p><img src="C:/Users/Kr0emer/AppData/Roaming/Typora/typora-user-images/image-20231112005549038.png" alt="image-20231112005549038"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231112005549038.png" alt="grub.cfg"></p>
 <p>最后将HelloOS.bin文件复制到/boot/目录下，重启虚拟机。</p>
-<p><img src="C:/Users/Kr0emer/AppData/Roaming/Typora/typora-user-images/image-20231112005655001.png" alt="image-20231112005655001"></p>
+<p><img src="C:/Users/Kr0emer/AppData/Roaming/Typora/typora-user-images/image-20231112005655001.png" alt="选择HelloOS"></p>
 <p>选择HelloOS,可以看到HelloOS的字样。</p>
-<p><img src="C:/Users/Kr0emer/AppData/Roaming/Typora/typora-user-images/image-20231112005707224.png" alt="image-20231112005707224"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20231112005707224.png" alt="完成！"></p>
 <p>这样我们就实现了一个最简单的OS了！</p>
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Kr0emer</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://kr0emer.com/2023/11/11/实现一个最简单的内核/">http://kr0emer.com/2023/11/11/实现一个最简单的内核/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Base/">Base</a><a class="post-meta__tags" href="/tags/OS/">OS</a></div><div class="social-share pull-right"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="prev-post pull-left"><a href="/2023/11/11/%E4%B8%80%E7%A7%8D%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%BF%E7%94%A8%E7%89%A9%E7%90%86%E6%9C%BA%E4%BB%A3%E7%90%86%E7%9A%84%E6%96%B9%E6%B3%95/"><i class="fa fa-chevron-left">  </i><span>一种虚拟机使用物理机代理的方法</span></a></div><div class="next-post pull-right"><a href="/2022/01/16/2021SCTF%E5%A4%8D%E7%8E%B0/"><span>2021SCTF复现</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
   clientID: '699be94dd9838f660bbd',
