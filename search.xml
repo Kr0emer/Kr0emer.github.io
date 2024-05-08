@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>使用vituralbox创建一个计算机</title>
+      <link href="/2024/05/05/%E4%BD%BF%E7%94%A8vitualbox%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+      <url>/2024/05/05/%E4%BD%BF%E7%94%A8vitualbox%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%AE%A1%E7%AE%97%E6%9C%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="使用vituralbox创建一个计算机"><a href="#使用vituralbox创建一个计算机" class="headerlink" title="使用vituralbox创建一个计算机"></a>使用vituralbox创建一个计算机</h1><ol><li><p>首先使用virtualbox创建一个新的硬盘</p></li><li><p>启动我们的ubuntu虚拟机，为其在home目录下添加一个hdisk文件夹</p></li><li><p>挂载该硬盘到hdisk文件夹，并创建ext4文件系统</p><p>使用下面的命令</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkfs.ext4 /dev/sdb</span><br><span class="line">sudo mount /dev/sdb hdisk</span><br></pre></td></tr></table></figure><p>但是这样挂载需要每次重启，我们选择修改/etc/fstab文件,在其末尾添加我们硬盘的信息</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20240507121144352.png" alt="image-20240507121144352"></p><p>可以在root级别使用<code> echo &quot;/dev/sdb        /home/kr0emer/hdisk   ext4  defaults 0  2 &quot; &gt;&gt; /etc/fstab</code>来添加</p></li><li><p>接下来在hdisk目录下创建boot目录</p></li><li><p>安装grub到新硬盘</p><p><code>sudo grub-install --boot-directory=./hdisk/boot/ --force --allow-floppy /dev/sdb</code></p></li><li><p>接着创建grub.cfg在<code>hdisk/boot/grub/</code>目录下</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">menuentry &#x27;HelloOS&#x27; &#123;</span><br><span class="line">insmod part_msdos</span><br><span class="line">insmod ext2</span><br><span class="line">set root=&#x27;hd0&#x27; #我们的硬盘只有一个分区所以是&#x27;hd0&#x27;</span><br><span class="line">multiboot2 /boot/HelloOS.eki #加载boot目录下的HelloOS.eki文件</span><br><span class="line">boot #引导启动</span><br><span class="line">&#125;</span><br><span class="line">set timeout_style=menu</span><br><span class="line">if [ &quot;$&#123;timeout&#125;&quot; = 0 ]; then</span><br><span class="line">  set timeout=10 #等待10秒钟自动启动</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></li><li><p>接下来关闭这个ubuntu虚拟机并创建一个新的虚拟机，选择hd.vid来创建虚拟机</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20240507121715737.png" alt="image-20240507121715737"></p></li><li><p>接下来打开该虚拟机，得到下图基本上就成功了，后面创建HelloOS.eki就可以了</p><p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20240507121903606.png" alt="image-20240507121903606"></p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> OS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Base </tag>
+            
+            <tag> OS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>实现一个最简单的内核</title>
       <link href="/2023/11/12/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8/"/>
       <url>/2023/11/12/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%86%85%E6%A0%B8/</url>
