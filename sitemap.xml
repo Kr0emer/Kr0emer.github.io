@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://kr0emer.com/2025/10/10/Fuzzing%20101-Exercise%201%20-%20Xpdf/</loc>
+    
+    <lastmod>2025-10-10</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://kr0emer.com/2025/07/19/AFL%E4%BB%A3%E7%A0%81%E8%AF%A6%E8%AF%BB%EF%BC%88%E4%B8%8B%EF%BC%89/</loc>
     
     <lastmod>2025-10-06</lastmod>
@@ -11,7 +18,7 @@
   <url>
     <loc>http://kr0emer.com/2025/07/14/AFL%E4%BB%A3%E7%A0%81%E8%AF%A6%E8%AF%BB%EF%BC%88%E4%B8%8A%EF%BC%89/</loc>
     
-    <lastmod>2025-07-14</lastmod>
+    <lastmod>2025-09-04</lastmod>
     
   </url>
   
@@ -130,7 +137,7 @@
 
   <url>
     <loc>http://kr0emer.com/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -138,49 +145,49 @@
   
   <url>
     <loc>http://kr0emer.com/tags/Pwn/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/Base/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/tricks/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/OS/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/Arm/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/Iot/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/tags/fuzz/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -189,63 +196,63 @@
   
   <url>
     <loc>http://kr0emer.com/categories/Pwn/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/Base/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/Pwn/X86-x64pwn/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/trick/</loc>
-    <lastmod>2025-10-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://kr0emer.com/categories/OS/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/Base/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/Base/link/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://kr0emer.com/categories/OS/</loc>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/Pwn/Armpwn/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://kr0emer.com/categories/fuzz/</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
