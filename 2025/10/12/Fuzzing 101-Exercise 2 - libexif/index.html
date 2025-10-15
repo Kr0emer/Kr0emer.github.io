@@ -25,14 +25,14 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cd $HOME/fuzzing_libexif</span><br><span class="line">wget https:<span class="comment">//github.com/ianare/exif-samples/archive/refs/heads/master.zip</span></span><br><span class="line">unzip master.zip</span><br></pre></td></tr></table></figure>
 
 <p>可以调用<code>$HOME/fuzzing_libexif/install/bin/exif $HOME/fuzzing_libexif/exif-samples-master/jpg/Canon_40D_photoshop_import.jpg</code>来看看功能</p>
-<p><img src="C:/Users/Kr0emer/AppData/Roaming/Typora/typora-user-images/image-20251011123647128.png"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20251011123647128.png"></p>
 <h2 id="使用AFL-插桩并fuzz"><a href="#使用AFL-插桩并fuzz" class="headerlink" title="使用AFL++插桩并fuzz"></a>使用AFL++插桩并fuzz</h2><p>现在AFL++已经统一使用afl-cc或者afl-c++作为统一的编译器了，所以我们这里直接使用afl-cc来编译。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> CC=afl-cc</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/fuzzing_libexif/libexif-libexif-0_6_15-release/</span><br><span class="line">make clean</span><br><span class="line">./configure --enable-shared=no --prefix=<span class="string">&quot;<span class="variable">$HOME</span>/fuzzing_libexif/fuzz/&quot;</span></span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/fuzzing_libexif/exif-exif-0_6_15-release</span><br><span class="line">make clean</span><br><span class="line">./configure --enable-shared=no --prefix=<span class="string">&quot;<span class="variable">$HOME</span>/fuzzing_libexif/fuzz/&quot;</span> PKG_CONFIG_PATH=<span class="variable">$HOME</span>/fuzzing_libexif/fuzz/lib/pkgconfig</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
 
 <p>接下来我们调用afl++测试</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">afl-fuzz -i <span class="variable">$HOME</span>/fuzzing_libexif/exif-samples-master/jpg/ -o <span class="variable">$HOME</span>/fuzzing_libexif/out/ -s 123 -- <span class="variable">$HOME</span>/fuzzing_libexif/fuzz/bin/exif @@</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:/Users/Kr0emer/AppData/Roaming/Typora/typora-user-images/image-20251011145606275.png" alt="image-20251011145606275"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20251011145606275.png" alt="image-20251011145606275"></p>
 <p>这样fuzz很快跑起来了，很快就发现了漏洞</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20251011154349084.png"></p>
 <p>上面的就是发现并保存的能造成crash的样例了。</p>
