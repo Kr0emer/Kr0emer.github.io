@@ -32,7 +32,7 @@
 <p>接下来我们调用afl++测试</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">afl-fuzz -i <span class="variable">$HOME</span>/fuzzing_libexif/exif-samples-master/jpg/ -o <span class="variable">$HOME</span>/fuzzing_libexif/out/ -s 123 -- <span class="variable">$HOME</span>/fuzzing_libexif/fuzz/bin/exif @@</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20251011145606275.png" alt="image-20251011145606275"></p>
+<p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20251011145606275.png"></p>
 <p>这样fuzz很快跑起来了，很快就发现了漏洞</p>
 <p><img src="https://kr0emer-blog-1306550410.cos.ap-nanjing.myqcloud.com/img/image-20251011154349084.png"></p>
 <p>上面的就是发现并保存的能造成crash的样例了。</p>
